@@ -1,4 +1,3 @@
-// app/Models/User.php
 <?php
 
 namespace App\Models;
@@ -12,7 +11,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'nama_lengkap',
-        'alamat',                  // ← TAMBAHAN
+        'alamat',
         'alamat_balai_desa',
         'no_telp',
         'email',
@@ -26,5 +25,6 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 }
