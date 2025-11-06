@@ -12,7 +12,7 @@
 </div>
 
 <div class="card">
-    <h3>Informasi Akun Anda</h3>
+    <h3>Informasi Akun Anda</h3>   
     <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
     <p><strong>Alamat Rumah:</strong> {{ Auth::user()->alamat }}</p>
     <p><strong>Balai Desa:</strong> {{ Auth::user()->alamat_balai_desa }}</p>

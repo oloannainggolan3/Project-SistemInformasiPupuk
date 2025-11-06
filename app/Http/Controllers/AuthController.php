@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // 1. TAMPILKAN FORM REGISTER
     public function showRegister()
     {
         return view('auth.register');
     }
 
+    // 2. PROSES REGISTRASI
     public function register(Request $request)
     {
         $request->validate([
@@ -37,11 +39,13 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    // 3. TAMPILKAN FORM LOGIN
     public function showLogin()
     {
         return view('auth.login');
     }
 
+    // 4. PROSES LOGIN
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -57,6 +61,7 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Email atau password salah.']);
     }
 
+    // 5. LOGOUT
     public function logout(Request $request)
     {
         Auth::logout();
@@ -65,6 +70,7 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
+    // 6. DASHBOARD
     public function dashboard()
     {
         return view('dashboard');
