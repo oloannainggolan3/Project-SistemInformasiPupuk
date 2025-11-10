@@ -16,7 +16,7 @@
             --secondary-blue: #5C6BC0; /* Biru/Ungu (Bibit) */
             --yellow-gold: #ffd700;   /* Kuning keemasan */
             --text-color: #333;       
-            --white: #ffffff;
+            --white: #ffffffff;
             --light-gray-bg: #f7f7f7; 
             --border-color: #ddd;     
         }
@@ -32,7 +32,7 @@
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--white);
+            background-color: #e8f5e9; /* Hijau halus untuk background body */
         }
 
         .container {
@@ -106,7 +106,7 @@
         .hero-image {
             width: 50%;
             /* Ganti dengan URL gambar kebun teh Anda */
-            background-image: url("{{ asset('images/teh.jpg') }}");
+            background-image: url("{{ asset('images/teh.png') }}");
             background-size: cover;
             background-position: center;
             height: 300px;
@@ -322,7 +322,7 @@
         /* Ganti URL gambar untuk setiap kartu produk */
         .pupuk-detail .detail-image {
             /* Ganti dengan URL gambar green house */
-            background-image: url('product-pupuk-greenhouse.jpg'); 
+            background-image: url({{ asset('images/teh.png') }}"); 
         }
 
         .bibit-detail .detail-image {
@@ -417,7 +417,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer-brand .logo { margin-bottom: 15px; }
+        .footer-brand .logo_bawah { margin-bottom: 15px; }
         .footer-brand h4 { font-size: 1.3em; margin: 0; }
         .footer-brand p { font-size: 0.8em; opacity: 0.8; }
         .footer-brand > p { margin-top: 15px; margin-bottom: 15px; font-size: 0.9em; }
@@ -442,9 +442,10 @@
             text-align: center;
             padding: 15px 0;
         }
-
+            
         .footer-bottom img { height: 30px; margin-bottom: 5px; }
         .footer-bottom p { font-size: 0.75em; opacity: 0.7; }
+
 
         /* --- Media Queries (Responsif) --- */
         @media (max-width: 900px) {
@@ -473,9 +474,9 @@
     <header class="navbar">
         <div class="container nav-content">
             <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo Pupuk & Bibit Subsidi">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Pupuk & Bibit Subsidi" style="height: 30px; width: 50px;">
                 <span>Pupuk & Bibit Subsidi</span>
-                <span class="subtitle">Sistem Informasi Pemerintah</span>
+                <p="subtitle">Sistem Informasi Pemerintah</p>
             </div>
             <nav>
                 <a href="#" class="active"><i class="fas fa-home"></i> Beranda</a>
@@ -581,6 +582,7 @@
                     <div class="detail-icon-overlay bg-primary-green"><i class="fas fa-leaf"></i></div>
                 </div>
                 <div class="detail-body">
+                    <img src="{{ asset('images/pohon.png') }}" alt="Logo Pupuk Subsidi" style="height: 120px; width: 200px;">
                     <h3>Pupuk Subsidi</h3>
                     <p>Dapatkan pupuk berkualitas tinggi dengan harga terjangkau melalui program subsidi pemerintah. Tersedia berbagai jenis pupuk untuk kebutuhan pertanian Anda.</p>
                     <ul class="jenis-pupuk-list">
@@ -603,6 +605,7 @@
                     <div class="detail-icon-overlay bg-secondary-blue"><i class="fas fa-link"></i></div>
                 </div>
                 <div class="detail-body">
+                    <img src="{{ asset('images/bibit.png') }}" alt="Logo Bibit Subsidi" style="height: 120px; width: 200px;">
                     <h3>Bibit Subsidi</h3>
                     <p>Pilihan bibit unggul bersertifikat dengan daya tumbuh tinggi dan hasil panen maksimal. Investasi terbaik untuk masa depan pertanian yang sukses.</p>
                     <ul class="jenis-bibit-list">
@@ -625,23 +628,23 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <div class="logo">
-                    <img src="logo-pupuk-subsidi.png" alt="Logo Pupuk & Bibit Subsidi" style="height: 40px; width: 40px;">
-                    <div>
-                        <h4>Pupuk Subsidi Indonesia</h4>
-                        <p>Program Pemerintah untuk Petani</p>
-                    </div>
-                </div>
-                <p>Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkualitas.</p>
-                <p class="follow-us">Follow us!</p>
-                <div class="social-links">
+                 <img src="{{ asset('images/logo.png') }}" alt="Logo Pupuk & Bibit Subsidi" style="height: 30px; width: 50px;">
+                    <h3>Pupuk Subsidi Indonesia</h3>
+                     <p class="subtitle">Program Pemerintah untuk Petani</p>
+                    <p class="footer-desc">
+                        Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi
+                        kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui
+                        program subsidi berkualitas.
+                    </p>
+                    <p class="follow-us">Follow us!</p>
+                <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook-square"></i> Facebook</a>
                     <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
                     <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
                 </div>
             </div>
             
-            <div class="footer-links">
+            <div class="footer-section menu">
                 <h4>Menu Utama</h4>
                 <ul>
                     <li><a href="#">Beranda</a></li>
@@ -651,7 +654,7 @@
                 </ul>
             </div>
 
-            <div class="footer-contact">
+            <div class="footer-sectioncontact">
                 <h4>Contact Us</h4>
                 <ul>
                     <li><i class="fas fa-map-marker-alt"></i> Jl. Sitoaluama, Laguboti, Toba</li>
@@ -662,8 +665,8 @@
         </div>
         
         <div class="footer-bottom">
-            <img src="logo-is.png" alt="Information Systems Logo">
-            <p>Dwi Institute of Technology</p>
+            <img src="{{ asset('images/lambang_himsi.png') }}" alt="Logo Information System">
+            <p>INFORMATION SYSTEMS<br />Del Institute of Technology</p>
         </div>
     </footer>
 
