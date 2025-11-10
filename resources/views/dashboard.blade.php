@@ -106,7 +106,7 @@
         .hero-image {
             width: 50%;
             /* Ganti dengan URL gambar kebun teh Anda */
-            background-image: url("{{ asset('images/teh.jpg') }}");
+            background-image: url("{{ asset('images/teh.png') }}");
             background-size: cover;
             background-position: center;
             height: 300px;
