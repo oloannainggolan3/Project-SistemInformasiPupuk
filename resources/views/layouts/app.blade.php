@@ -6,14 +6,27 @@
     <title>@yield('title') - Pupuk & Bibit Subsidi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; padding-top: 100px; } /* offset for fixed header */
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: #1a5d1a; color: white; padding: 1rem 0; text-align: center; }
+        header {
+            display:flex;
+            align-items:center;
+            justify-content:flex-start;
+            background-color:#155d27;
+            padding:15px 80px;
+            color:white;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:1000;
+        }
         .btn { 
             background: #2e8b57; color: white; padding: 12px 24px; 
             border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
             text-decoration: none; display: inline-block;
         }
+        
         .btn:hover { background: #1a5d1a; }
         .btn-success { background: #28a745; }
         .btn-sm { padding: 8px 16px; font-size: 0.9rem; }
@@ -32,8 +45,13 @@
     </style>
 </head>
 <body>
+    <!-- HEADER: fixed at top-left (full width) -->
     <header>
-        <h1>Pupuk dan Bibit Bersubsidi Pemerintah</h1>
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin-right:15px;">
+        <div>
+            <h2 style="font-size:1.4rem; font-weight:700; margin:0;">Pupuk & Bibit Subsidi</h2>
+            <p style="font-size:0.9rem; margin:0; opacity:0.9;">Sistem Informasi Pemerintah</p>
+        </div>
     </header>
 
     <div class="container">

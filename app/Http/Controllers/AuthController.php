@@ -22,9 +22,9 @@ class AuthController extends Controller
             'alamat_balai_desa' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:3|confirmed',
         ]);
-
+        
         User::create([
             'nama_lengkap' => $request->nama_lengkap,
             'alamat' => $request->alamat,
