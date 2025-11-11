@@ -21,4 +21,21 @@ class Product extends Model
         'gambar',
         'deskripsi'
     ];
+
+    /**
+     * Relasi ke ProductImage (multiple images)
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id_produk')->orderBy('order');
+    }
+
+    /**
+     * Get primary image
+     */
+    public function primaryImage()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id', 'id_produk')
+                    ->where('is_primary', true);
+    }
 }
