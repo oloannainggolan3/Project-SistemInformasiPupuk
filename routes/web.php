@@ -24,6 +24,11 @@ Route::get('/pupuk-bibit', function () {
     return view('pupuk&bibit');
 })->name('pupuk.bibit');
 
+// Route untuk halaman Profil User
+Route::get('/profil', function () {
+    return view('ProfilUser');
+})->name('profil.user')->middleware('auth');
+
 Route::resource('products', ProductController::class);
 
 // Routes untuk Admin
