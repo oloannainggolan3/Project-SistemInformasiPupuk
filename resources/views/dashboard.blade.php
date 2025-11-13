@@ -478,8 +478,8 @@
                 <span class="subtitle">Sistem Informasi Pemerintah</span>
             </div>
             <nav>
-                <a href="#" class="active"><i class="fas fa-home"></i> Beranda</a>
-                <a href="#"><i class="fas fa-box"></i> Pupuk & Bibit</a>
+                <a href="{{ route('dashboard') }}" class="active"><i class="fas fa-home"></i> Beranda</a>
+                <a href="{{ route('pupuk.bibit') }}"><i class="fas fa-box"></i> Pupuk & Bibit</a>
                 <a href="#"><i class="fas fa-user"></i> Profil</a>
                 <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
             </nav>

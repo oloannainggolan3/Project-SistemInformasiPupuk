@@ -19,6 +19,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
+// Route untuk halaman Pupuk & Bibit
+Route::get('/pupuk-bibit', function () {
+    return view('pupuk&bibit');
+})->name('pupuk.bibit');
+
 Route::resource('products', ProductController::class);
 
 // Routes untuk Admin
