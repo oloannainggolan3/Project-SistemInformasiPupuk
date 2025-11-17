@@ -21,6 +21,10 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard'
 
 Route::resource('products', ProductController::class);
 
+Route::get('/forgot-password-test', function () {
+    return view('auth.forgot-password');
+});
+
 // Routes untuk Admin
 Route::prefix('admin')->group(function () {
     // Halaman login (tidak perlu auth)
