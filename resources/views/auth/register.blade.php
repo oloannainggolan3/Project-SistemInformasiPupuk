@@ -1,7 +1,7 @@
-    @extends('layouts.app')
-    @section('title', 'Register')
+@extends('layouts.auth')
+@section('title', 'Register')
 
-    @section('content')
+@section('content')
     <style>
         body {
             background-color: #f0fbea;

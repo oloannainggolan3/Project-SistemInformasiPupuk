@@ -14,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => \App\Http\Middleware\AdminAuth::class,
         ]);
+        
+        // Redirect unauthenticated users to home page
+        $middleware->redirectGuestsTo(fn () => route('home'));
+        
+        // Redirect authenticated users to dashboard if they try to access login/register
+        $middleware->redirectUsersTo(fn () => route('dashboard'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
