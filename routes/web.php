@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
-    return view('home');
+    return view('user.HOME');
 })->name('home');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -18,6 +18,26 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+// Route untuk halaman Pupuk & Bibit (gabungan)
+Route::get('/pupuk-bibit', function () {
+    return view('user.pupukdanbibit');
+})->name('pupuk.bibit');
+
+// Route untuk halaman Kontak
+Route::get('/kontak', function () {
+    return view('user.kontak');
+})->name('kontak');
+Route::post('/kontak/send', [AuthController::class, 'sendKontak'])->name('kontak.send');
+
+// Route untuk halaman Profil User
+Route::get('/profil', function () {
+    return view('user.ProfilUser');
+})->name('profil.user')->middleware('auth');
+
+// Route untuk Edit Profil
+Route::get('/profil/edit', [AuthController::class, 'editProfil'])->name('profil.edit')->middleware('auth');
+Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('profil.update')->middleware('auth');
 
 Route::resource('products', ProductController::class);
 

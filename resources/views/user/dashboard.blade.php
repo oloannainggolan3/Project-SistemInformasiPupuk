@@ -435,6 +435,8 @@
         }
 
         .footer-links ul li, .footer-contact ul li { margin-bottom: 8px; font-size: 0.9em; }
+        
+        .footer-links ul li a:hover { color: var(--primary-green); text-decoration: underline; }
 
         .footer-contact i { margin-right: 8px; color: var(--primary-green); }
 
@@ -470,24 +472,7 @@
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container nav-content">
-            <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo Pupuk & Bibit Subsidi">
-                <span>Pupuk & Bibit Subsidi</span>
-                <span class="subtitle">Sistem Informasi Pemerintah</span>
-            </div>
-            <nav>
-                <a href="#" class="active"><i class="fas fa-home"></i> Beranda</a>
-                <a href="#"><i class="fas fa-box"></i> Pupuk & Bibit</a>
-                <a href="#"><i class="fas fa-user"></i> Profil</a>
-                <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
-            </nav>
-            <div class="nav-icons">
-                <i class="fas fa-bell"></i>
-            </div>
-        </div>
-    </header>
+    @include('partials.header')
 
     <section class="hero-section">
         <div class="container hero-content">
@@ -594,7 +579,9 @@
                         <span class="tag green">Kualitas Terjamin SNI</span>
                         <span class="tag green">Distribusi merata</span>
                     </div>
-                    <button class="action-button-detail bg-primary-green">Pesan Pupuk Sekarang</button>
+                    <a href="{{ route('pupuk.bibit') }}" style="display: block; text-decoration: none;">
+                        <button class="action-button-detail bg-primary-green">Pesan Pupuk Sekarang</button>
+                    </a>
                 </div>
             </div>
 
@@ -616,56 +603,15 @@
                         <span class="tag purple">Bersertifikat resmi</span>
                         <span class="tag purple">Hasil panen optimal</span>
                     </div>
-                    <button class="action-button-detail bg-secondary-blue">Pesan Bibit Sekarang</button>
+                    <a href="{{ route('pupuk.bibit') }}" style="display: block; text-decoration: none;">
+                        <button class="action-button-detail bg-secondary-blue">Pesan Bibit Sekarang</button>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
     
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="logo">
-                    <img src="logo-pupuk-subsidi.png" alt="Logo Pupuk & Bibit Subsidi" style="height: 40px; width: 40px;">
-                    <div>
-                        <h4>Pupuk Subsidi Indonesia</h4>
-                        <p>Program Pemerintah untuk Petani</p>
-                    </div>
-                </div>
-                <p>Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkualitas.</p>
-                <p class="follow-us">Follow us!</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-square"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
-                    <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
-                </div>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Menu Utama</h4>
-                <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="#">Pupuk & Bibit</a></li>
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Kontak</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Jl. Sitoaluama, Laguboti, Toba</li>
-                    <li><i class="fas fa-phone"></i> +91 91813 23 2309</li>
-                    <li><i class="fas fa-envelope"></i> hello@squareup.com</li>
-                </ul>
-            </div>
-        </div>
+    @include('partials.footer')
         
-        <div class="footer-bottom">
-            <img src="logo-is.png" alt="Information Systems Logo">
-            <p>Dwi Institute of Technology</p>
-        </div>
-    </footer>
-
 </body>
 </html>
