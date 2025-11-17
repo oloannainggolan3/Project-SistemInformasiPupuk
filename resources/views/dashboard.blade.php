@@ -478,9 +478,9 @@
                 <span class="subtitle">Sistem Informasi Pemerintah</span>
             </div>
             <nav>
-                <a href="#" class="active"><i class="fas fa-home"></i> Beranda</a>
-                <a href="#"><i class="fas fa-box"></i> Pupuk & Bibit</a>
-                <a href="#"><i class="fas fa-user"></i> Profil</a>
+                <a href="{{ route('dashboard') }}" class="active"><i class="fas fa-home"></i> Beranda</a>
+                <a href="{{ route('pupuk.bibit') }}"><i class="fas fa-box"></i> Pupuk & Bibit</a>
+                <a href="{{ route('profil.user') }}"><i class="fas fa-user"></i> Profil</a>
                 <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
             </nav>
             <div class="nav-icons">
@@ -594,7 +594,9 @@
                         <span class="tag green">Kualitas Terjamin SNI</span>
                         <span class="tag green">Distribusi merata</span>
                     </div>
-                    <button class="action-button-detail bg-primary-green">Pesan Pupuk Sekarang</button>
+                    <a href="{{ route('pupuk.bibit') }}" style="display: block; text-decoration: none;">
+                        <button class="action-button-detail bg-primary-green">Pesan Pupuk Sekarang</button>
+                    </a>
                 </div>
             </div>
 
@@ -616,7 +618,9 @@
                         <span class="tag purple">Bersertifikat resmi</span>
                         <span class="tag purple">Hasil panen optimal</span>
                     </div>
-                    <button class="action-button-detail bg-secondary-blue">Pesan Bibit Sekarang</button>
+                    <a href="{{ route('pupuk.bibit') }}" style="display: block; text-decoration: none;">
+                        <button class="action-button-detail bg-secondary-blue">Pesan Bibit Sekarang</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -644,9 +648,9 @@
             <div class="footer-links">
                 <h4>Menu Utama</h4>
                 <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="#">Pupuk & Bibit</a></li>
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="{{ route('dashboard') }}">Beranda</a></li>
+                    <li><a href="{{ route('pupuk.bibit') }}">Pupuk & Bibit</a></li>
+                    <li><a href="{{ route('profil.user') }}">Profil</a></li>
                     <li><a href="#">Kontak</a></li>
                 </ul>
             </div>
@@ -666,6 +670,6 @@
             <p>Dwi Institute of Technology</p>
         </div>
     </footer>
-
+        
 </body>
 </html>
