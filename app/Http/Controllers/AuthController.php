@@ -67,6 +67,86 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        return view('user.dashboard');
+    }
+
+    public function editProfil()
+    {
+        return view('user.EditProfil');
+    }
+
+    public function updateProfil(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validation rules
+        $rules = [
+            'nama_lengkap' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'no_telp' => 'required|string|max:20',
+            'username' => 'nullable|string|max:255',
+            'kabupaten' => 'nullable|string|max:255',
+            'kode_pos' => 'nullable|string|max:10',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
+
+        // Add password validation only if user wants to change it
+        if ($request->filled('current_password')) {
+            $rules['current_password'] = 'required';
+            $rules['password'] = 'required|min:3|confirmed';
+
+            // Verify current password
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'Sandi saat ini tidak sesuai.'])->withInput();
+            }
+        }
+
+        $validated = $request->validate($rules);
+
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            // Delete old photo if exists
+            if ($user->foto && file_exists(public_path('images/profiles/' . $user->foto))) {
+                unlink(public_path('images/profiles/' . $user->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/profiles'), $filename);
+            $validated['foto'] = $filename;
+        }
+
+        // Update password if provided
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($request->password);
+        } else {
+            unset($validated['password']);
+        }
+
+        // Remove password confirmation field
+        unset($validated['current_password']);
+        unset($validated['password_confirmation']);
+
+        // Update user data
+        $user->update($validated);
+
+        return redirect()->route('profil.user')->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    public function sendKontak(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_telp' => 'required|string|max:20',
+            'email' => 'required|email',
+            'pesan' => 'required|string',
+        ]);
+
+        // Di sini Anda bisa menambahkan logika untuk menyimpan pesan ke database
+        // atau mengirim email ke admin
+        // Untuk sementara, kita hanya redirect dengan pesan sukses
+
+        return redirect()->route('kontak')->with('success', 'Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.');
     }
 }

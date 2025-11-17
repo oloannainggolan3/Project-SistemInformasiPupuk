@@ -45,14 +45,8 @@
     </style>
 </head>
 <body>
-    <!-- HEADER: fixed at top-left (full width) -->
-    <header>
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin-right:15px;">
-        <div>
-            <h2 style="font-size:1.4rem; font-weight:700; margin:0;">Pupuk & Bibit Subsidi</h2>
-            <p style="font-size:0.9rem; margin:0; opacity:0.9;">Sistem Informasi Pemerintah</p>
-        </div>
-    </header>
+    <!-- HEADER: included partial for consistent navigation -->
+    @include('partials.header')
 
     <div class="container">
         @if(session('success'))

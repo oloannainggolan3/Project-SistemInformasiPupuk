@@ -439,22 +439,8 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-section">
-            <div class="logo">🌾</div>
-            <div class="logo-text">
-                <h1>Pupuk & Bibit Subsidi</h1>
-                <p>Sistem Informasi Pemerintah</p>
-            </div>
-        </div>
-        <nav>
-            <button class="nav-btn" onclick="scrollToSection('beranda')">🏠 Beranda </button>
-            <button class="nav-btn active" onclick="scrollToSection('pupuk-subsidi')">🌱 Pupuk & Bibit</button>
-            <button class="nav-btn" onclick="scrollToSection('profil')">👤 Profil</button>
-            <button class="nav-btn" onclick="scrollToSection('kontak')">✉️ Kontak</button>
-            <button class="nav-btn">🔔</button>
-        </nav>
-    </header>
+    {{-- Header partial --}}
+    @include('partials.header')
             
     <main>
         <section id="pupuk-subsidi">
@@ -642,62 +628,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <div class="footer-logo-icon">🌾</div>
-                    <div class="footer-logo-text">
-                        <h4>Pupuk Subsidi Indonesia</h4>
-                        <p>Program Pemerintah untuk Petani</p>
-                    </div>
-                </div>
-                <p>Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkualitas.</p>
-                <p style="margin-top: 15px;">Follow us!</p>
-                <div class="social-links">
-                    <a href="#">📘 Facebook</a>
-                    <a href="#">📷 Instagram</a>
-                    <a href="#">🐦 Twitter</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Menu Utama</h3>
-                <ul class="menu-list">
-                    <li><a href="#beranda">Beranda</a></li>
-                    <li><a href="#pupuk-subsidi">Pupuk & Bibit</a></li>
-                    <li><a href="#profil">Profil</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <div class="contact-item">
-                    <span class="contact-icon">📍</span>
-                    <span>Jl. Sitoluama, Laguboti, Toba</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">📞</span>
-                    <span>+31 91813 23 2309</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">✉️</span>
-                    <span>hello@squareup.com</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="institute-badge">
-                <div class="badge-icon"></div>
-                <div class="badge-text">
-                    <h5>INFORMATION SYSTEMS</h5>
-                    <p>Del Institute of Technology</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <script>
         // Function to scroll to specific section

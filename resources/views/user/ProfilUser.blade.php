@@ -654,26 +654,18 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo-section">
-            <div class="logo">🌾</div>
-            <div class="logo-text">
-                <h1>Pupuk & Bibit Subsidi</h1>
-                <p>Sistem Informasi Pemerintah</p>
-            </div>
-        </div>
-        <nav>
-            <a href="#"><span>🏠</span> Beranda</a>
-            <a href="#"><span>🌱</span> Pupuk & Bibit</a>
-            <a href="#" class="active"><span>👤</span> Profil</a>
-            <a href="#"><span>✉️</span> Kontak</a>
-            <div class="notification-icon">🔔</div>
-        </nav>
-    </header>
+    {{-- Header partial --}}
+    @include('partials.header')
 
     <!-- Main Content -->
     <div class="container">
+        @if(session('success'))
+            <div style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
+                <i class="fas fa-check-circle"></i>
+                {{ session('success') }}
+            </div>
+        @endif
+        
         <div class="dashboard-title">User Dashboard</div>
 
         <div class="dashboard-content">
@@ -681,33 +673,36 @@
             <aside>
                 <div class="profile-card">
                     <div class="profile-avatar">
-                        <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=4caf50&color=fff&size=200" alt="Profile">
+                        <img src="{{ auth()->user()->foto ? asset('images/profiles/' . auth()->user()->foto) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->nama_lengkap) . '&background=4caf50&color=fff&size=200' }}" alt="Profile">
                     </div>
                     <div class="profile-name">
-                        <h2>Budi Santoso</h2>
-                        <p>Budi123</p>
+                        <h2>{{ auth()->user()->nama_lengkap }}</h2>
+                        <p>{{ auth()->user()->username ?? 'User' }}</p>
                     </div>
                     <div class="profile-info">
                         <div class="info-item">
                             <span class="info-icon">✉️</span>
-                            <span>budi.santoso@gmail.com</span>
+                            <span>{{ auth()->user()->email }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-icon">📞</span>
-                            <span>+62 812-3456-7890</span>
+                            <span>{{ auth()->user()->no_telp }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-icon">📍</span>
-                            <span>Desa Sukamaju, Kec. Subang, Kab. Subang, Jawa Barat</span>
+                            <span>{{ auth()->user()->alamat }}{{ auth()->user()->kabupaten ? ', ' . auth()->user()->kabupaten : '' }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-icon">📅</span>
-                            <span>Bergabung Sejak Januari 2020</span>
+                            <span>Bergabung Sejak {{ auth()->user()->created_at->format('F Y') }}</span>
                         </div>
                     </div>
                     <div class="profile-actions">
-                        <button class="btn btn-edit">Edit Profil</button>
-                        <button class="btn btn-logout">➜ Keluar</button>
+                        <a href="{{ route('profil.edit') }}" class="btn btn-edit" style="text-decoration: none; text-align: center;">Edit Profil</a>
+                        <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                            @csrf
+                            <button type="submit" class="btn btn-logout" style="width: 100%;">➜ Keluar</button>
+                        </form>
                     </div>
                 </div>
 
@@ -847,48 +842,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <h3>Pupuk Subsidi Indonesia</h3>
-                <p>Program Pemerintah untuk Petani</p>
-                <p>Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkualitas.</p>
-                <div class="social-links">
-                    <a href="#" class="social-btn">📘 Facebook</a>
-                    <a href="#" class="social-btn">📷 Instagram</a>
-                    <a href="#" class="social-btn">🐦 Twitter</a>
-                </div>
-            </div>
-            <div class="footer-menu">
-                <h4>Menu Utama</h4>
-                <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="#">Pupuk & Bibit</a></li>
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Kontak</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <div class="contact-item">
-                    <span>📍</span>
-                    <span>Jl. Sitoluama, Laguboti, Toba</span>
-                </div>
-                <div class="contact-item">
-                    <span>📞</span>
-                    <span>+91 91813 23 2309</span>
-                </div>
-                <div class="contact-item">
-                    <span>✉️</span>
-                    <span>hello@squareup.com</span>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>🎓 INFORMATION SYSTEMS - Del Institute of Technology</p>
-        </div>
-    </footer>
+    {{-- Footer --}}
+    @include('partials.footer')
 
     <script>
         // Add smooth scrolling
