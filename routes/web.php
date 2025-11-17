@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('user.HOME');
 })->name('home');
 
+Route::get('/notifikasi/detail', function () {
+    return view('user.DetailNotif');
+});
+
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 
