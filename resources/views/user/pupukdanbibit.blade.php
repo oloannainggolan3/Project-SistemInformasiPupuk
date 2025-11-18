@@ -657,13 +657,12 @@
             });
         });
 
-        // Button click effects
-        document.querySelectorAll('.btn-detail').forEach(button => {
+        // Button click effects - Redirect ke halaman detail
+        document.querySelectorAll('.btn-detail').forEach((button, index) => {
             button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1.02)';
-                }, 100);
+                // ID produk berdasarkan urutan (1-6)
+                const productId = index + 1;
+                window.location.href = '{{ url("/user/pupuk-bibit") }}/' + productId + '/detail';
             });
         });
 
