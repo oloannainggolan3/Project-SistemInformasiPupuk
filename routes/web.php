@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('user.HOME');
 })->name('home');
 
+Route::get('/notifikasi/detail', function () {
+    return view('user.DetailNotif');
+});
+
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 
@@ -40,6 +44,10 @@ Route::get('/profil/edit', [AuthController::class, 'editProfil'])->name('profil.
 Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('profil.update')->middleware('auth');
 
 Route::resource('products', ProductController::class);
+
+Route::get('/forgot-password-test', function () {
+    return view('auth.forgot-password');
+});
 
 // Routes untuk Admin
 Route::prefix('admin')->group(function () {
