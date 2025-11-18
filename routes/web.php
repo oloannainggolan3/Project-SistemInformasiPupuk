@@ -16,9 +16,6 @@ Route::get('/', function () {
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process')->middleware('guest');
-Route::get('/notifikasi/detail', function () {
-    return view('user.DetailNotif');
-});
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process');
@@ -51,6 +48,14 @@ Route::middleware('auth')->group(function () {
     // Route untuk Edit Profil
     Route::get('/profil/edit', [AuthController::class, 'editProfil'])->name('profil.edit');
     Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('profil.update');
+    
+    // Route untuk halaman Notifikasi
+    Route::get('/notifikasi', function () {
+        return view('user.Notifikasi');
+    })->name('notifikasi');
+    Route::get('/notifikasi/detail', function () {
+        return view('user.DetailNotif');
+    })->name('notifikasi.detail');
     
     Route::resource('products', ProductController::class);
 });

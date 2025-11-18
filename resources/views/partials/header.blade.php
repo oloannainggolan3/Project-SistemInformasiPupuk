@@ -47,9 +47,11 @@
                 <span>Kontak</span>
             </a>
             
-            <a href="#" title="Notifikasi" style="padding:7px 10px;border-radius:6px;display:inline-flex;align-items:center;color:#555;transition:all 0.3s ease;">
-                <span style="font-size:18px;">🔔</span>
-            </a>
+            @auth
+                <a href="{{ route('notifikasi') }}" title="Notifikasi" class="nav-link" style="text-decoration:none;padding:7px 10px;border-radius:6px;display:inline-flex;align-items:center;color:#555;transition:all 0.3s ease;">
+                    <span style="font-size:18px;">🔔</span>
+                </a>
+            @endauth
         </nav>
     </div>
 </header>
