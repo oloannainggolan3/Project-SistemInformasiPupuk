@@ -21,6 +21,14 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Halaman reset password (view statis sementara)
+Route::get('/reset-password', function () {
+    return view('auth.resetpw');
+})->name('password.reset');
+
+// Proses reset password (POST)
+Route::post('/reset-password', [AuthController::class, 'processReset'])->name('password.reset.post');
+
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 // Route untuk halaman Pupuk & Bibit (gabungan)
