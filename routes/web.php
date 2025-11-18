@@ -16,6 +16,12 @@ Route::get('/', function () {
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'register'])->name('register.process')->middleware('guest');
+Route::get('/notifikasi/detail', function () {
+    return view('user.DetailNotif');
+});
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process')->middleware('guest');
@@ -47,6 +53,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('profil.update');
     
     Route::resource('products', ProductController::class);
+});
+
+Route::get('/forgot-password-test', function () {
+    return view('auth.forgot-password');
 });
 
 // Routes untuk Admin
