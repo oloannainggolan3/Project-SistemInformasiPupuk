@@ -220,7 +220,7 @@
                         </button>
                     </div>
 
-                    <a class="link" href="#">Lupa Kata Sandi?</a>
+                    <a class="link" href="{{ route('password.reset') }}">Lupa Kata Sandi?</a>
                 </form>
             </div>
         </main>

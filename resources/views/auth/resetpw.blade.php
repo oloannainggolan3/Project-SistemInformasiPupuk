@@ -368,29 +368,6 @@
       }
     }
   </style>
-</head>
-<body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="container nav-content">
-      <div class="logo">
-        <img src="{{ asset('logo.png') }}" alt="Logo Pupuk & Bibit Subsidi" />
-        <div>
-          Pupuk & Bibit Subsidi<br />
-          <span class="subtitle">Sistem Informasi Pemerintah</span>
-        </div>
-      </div>
-      <nav>
-        <a href="#"><i class="fas fa-home"></i> Beranda</a>
-        <a href="#" class="active">
-          <i class="fas fa-seedling"></i> Pupuk & Bibit
-        </a>
-        <a href="#"><i class="fas fa-user"></i> Profil</a>
-        <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
-      </nav>
-      <div class="nav-icons"><i class="fas fa-bell"></i></div>
-    </div>
-  </header>
 
   <!-- Reset Password -->
   <section class="reset-password-section">
@@ -401,7 +378,8 @@
           Masukkan alamat email Anda, password baru, dan konfirmasi password untuk
           mereset password akun.
         </p>
-        <form id="reset-form" action="#" method="post" novalidate>
+        <form id="reset-form" action="{{ route('password.reset.post') }}" method="post" novalidate>
+          @csrf
           <div class="form-group">
             <label for="email">Alamat Email</label>
             <input
@@ -416,11 +394,11 @@
           <div class="form-group">
             <label for="new-password">Password Baru</label>
             <input
-              type="password"z
+              type="password"
               id="new-password"
               name="new_password"
               placeholder="Masukkan password baru"
-              minlength="8"
+              minlength="4"
               required
               autocomplete="new-password"
             />
@@ -430,9 +408,9 @@
             <input
               type="password"
               id="confirm-password"
-              name="confirm_password"
+              name="new_password_confirmation"
               placeholder="Konfirmasi password baru"
-              minlength="8"
+              minlength="4"
               required
               autocomplete="new-password"
             />
@@ -442,83 +420,55 @@
           </div>
           <button type="submit" class="cta-button">Reset Password</button>
         </form>
-        <div class="back-to-login">
-          <a href="#">Kembali ke Login</a>
-        </div>
+        <!-- Removed explicit back-to-login link per request -->
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="logo">
-          <img src="logo.png" alt="Logo Pupuk & Bibit Subsidi" />
-          <div>
-            <h4>Pupuk Subsidi Indonesia</h4>
-            <p>Program Pemerintah untuk Petani</p>
-          </div>
-        </div>
-        <p>
-          Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani
-          Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkualitas.
-        </p>
-        <p class="follow-us">Follow us!</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook-square"></i> Facebook</a>
-          <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
-          <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
-        </div>
-      </div>
-
-      <div class="footer-links">
-        <h4>Menu Utama</h4>
-        <ul>
-          <li><a href="#">Beranda</a></li>
-          <li><a href="#">Pupuk & Bibit</a></li>
-          <li><a href="#">Profil</a></li>
-          <li><a href="#">Kontak</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-contact">
-        <h4>Contact Us</h4>
-        <ul>
-          <li>
-            <i class="fas fa-map-marker-alt"></i> Jl. Sitoaluama, Laguboti, Toba
-          </li>
-          <li><i class="fas fa-phone"></i> +91 91813 23 2309</li>
-          <li><i class="fas fa-envelope"></i> hello@squareup.com</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <img src="lambang himsi.png" alt="Information Systems Logo" />
-      <p>Dwi Institute of Technology</p>
-    </div>
-  </footer>
+  @include('partials.footer')
 
   <script>
-    // Script validasi password konfirmasi
-    const form = document.getElementById("reset-form");
-    const newPasswordInput = document.getElementById("new-password");
-    const confirmPasswordInput = document.getElementById("confirm-password");
-    const errorMessage = document.getElementById("password-error");
+    // Script validasi password konfirmasi and redirect to login on success
+    (function(){
+      const form = document.getElementById("reset-form");
+      const newPasswordInput = document.getElementById("new-password");
+      const confirmPasswordInput = document.getElementById("confirm-password");
+      const errorMessage = document.getElementById("password-error");
 
-    form.addEventListener("submit", (e) => {
-      const newPassword = newPasswordInput.value.trim();
-      const confirmPassword = confirmPasswordInput.value.trim();
-      errorMessage.style.display = "none";
+      form.addEventListener("submit", function(e) {
+        // validate on submit; allow normal submission when valid
+        const newPassword = newPasswordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+        errorMessage.style.display = "none";
 
-      // minimal 8 karakter validasi di HTML juga sudah ada (minlength)
+        if (newPassword === '' || confirmPassword === '') {
+          e.preventDefault();
+          errorMessage.textContent = 'Semua field harus diisi.';
+          errorMessage.style.display = 'block';
+          return;
+        }
 
-      if (newPassword !== confirmPassword) {
-        e.preventDefault();
-        errorMessage.style.display = "block";
-        confirmPasswordInput.focus();
-      }
-    });
+        // rule: letters + digits, min 4
+        const rule = /(?=.*[A-Za-z])(?=.*\d).{4,}/;
+        if (!rule.test(newPassword)){
+          e.preventDefault();
+          errorMessage.textContent = 'Password harus mengandung huruf dan angka, minimal 4 karakter.';
+          errorMessage.style.display = 'block';
+          newPasswordInput.focus();
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          e.preventDefault();
+          errorMessage.textContent = 'Password tidak cocok. Silakan coba lagi.';
+          errorMessage.style.display = 'block';
+          confirmPasswordInput.focus();
+          return;
+        }
+
+        // if here, allow form to submit to server
+      });
+    })();
   </script>
+
 </body>
 </html>

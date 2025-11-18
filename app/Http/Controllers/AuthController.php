@@ -149,4 +149,30 @@ class AuthController extends Controller
 
         return redirect()->route('kontak')->with('success', 'Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.');
     }
+
+    /**
+     * Process a password reset request (simple flow: email + new password + confirm)
+     */
+    public function processReset(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'new_password' => 'required|string|min:4|confirmed',
+        ], [
+            'new_password.required' => 'Password baru wajib diisi',
+            'new_password.min' => 'Password minimal 4 karakter',
+            'new_password.confirmed' => 'Konfirmasi password tidak cocok',
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+        if (!$user) {
+            return back()->withInput()->withErrors(['email' => 'Alamat email tidak terdaftar.']);
+        }
+
+        // Update password
+        $user->password = Hash::make($validated['new_password']);
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Password berhasil direset. Silakan login dengan password baru.');
+    }
 }
