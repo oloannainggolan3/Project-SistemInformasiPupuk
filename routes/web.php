@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PupukBibitController;
 
 Route::get('/', function () {
     // Jika user sudah login, redirect ke dashboard
@@ -57,13 +58,19 @@ Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('pro
 
 Route::resource('products', ProductController::class);
 // Routes yang memerlukan autentikasi
+Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
+    // Halaman Pupuk & Bibit
+    Route::get('/pupuk-bibit', [PupukBibitController::class, 'index'])->name('pupukbibit');
+    
+    // Halaman Detail & Pesan Produk
+    Route::get('/pupuk-bibit/{id}/detail', [PupukBibitController::class, 'detail'])->name('pupukbibit.detail');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     
-    // Route untuk halaman Pupuk & Bibit (gabungan)
-    Route::get('/pupuk-bibit', function () {
-        return view('user.pupukdanbibit');
-    })->name('pupuk.bibit');
+    // Route untuk halaman Pupuk & Bibit (gabungan) - backward compatibility
+    Route::get('/pupuk-bibit', [PupukBibitController::class, 'index'])->name('pupuk.bibit');
     
     // Route untuk halaman Kontak
     Route::get('/kontak', function () {
