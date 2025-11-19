@@ -64,6 +64,9 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     
     // Halaman Detail & Pesan Produk
     Route::get('/pupuk-bibit/{id}/detail', [PupukBibitController::class, 'detail'])->name('pupukbibit.detail');
+    
+    // Halaman Konfirmasi Pesanan
+    Route::post('/pupuk-bibit/{id}/konfirmasi', [PupukBibitController::class, 'confirmOrder'])->name('pupukbibit.konfirmasi');
 });
 
 Route::middleware('auth')->group(function () {
