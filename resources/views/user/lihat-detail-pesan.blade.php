@@ -19,74 +19,6 @@
             min-height: 100vh;
         }
 
-        /* Header Styles */
-        header {
-            background-color: #ffffff;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            background-color: #d4a574;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .logo-text h1 {
-            font-size: 18px;
-            color: #2d5016;
-            font-weight: 600;
-        }
-
-        .logo-text p {
-            font-size: 12px;
-            color: #666;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-btn {
-            padding: 10px 20px;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            font-size: 14px;
-            color: #333;
-            transition: all 0.3s ease;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .nav-btn:hover {
-            background-color: #f0f0f0;
-        }
-
-        .nav-btn.active {
-            background-color: #10b981;
-            color: white;
-        }
-
         /* Back Button */
         .back-button {
             max-width: 1400px;
@@ -483,66 +415,6 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
-        footer {
-            background: #155d27;
-            color: white;
-            padding: 40px 50px;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-logo h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .footer-logo p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #d0d0d0;
-        }
-
-        .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            color: #d0d0d0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #10b981;
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 30px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            text-align: center;
-            font-size: 14px;
-            color: #d0d0d0;
-        }
-
         @media (max-width: 1024px) {
             .product-detail {
                 grid-template-columns: 1fr;
@@ -552,41 +424,11 @@
             .usage-grid {
                 grid-template-columns: 1fr;
             }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo-section">
-            <div class="logo">🌾</div>
-            <div class="logo-text">
-                <h1>Pupuk & Bibit Subsidi</h1>
-                <p>Sistem Informasi Pemerintah</p>
-            </div>
-        </div>
-        <nav>
-            <a href="{{ route('dashboard') }}" class="nav-btn">
-                <i class="fas fa-home"></i> Beranda
-            </a>
-            <a href="{{ route('user.pupukbibit') }}" class="nav-btn active">
-                <i class="fas fa-seedling"></i> Pupuk & Bibit
-            </a>
-            <a href="{{ route('profil.user') }}" class="nav-btn">
-                <i class="fas fa-user"></i> Profil
-            </a>
-            <a href="{{ route('kontak') }}" class="nav-btn">
-                <i class="fas fa-envelope"></i> Kontak
-            </a>
-            <a href="#" class="nav-btn">
-                <i class="fas fa-bell"></i>
-            </a>
-        </nav>
-    </header>
+    @include('partials.header')
 
     <!-- Back Button -->
     <div class="back-button">
@@ -602,12 +444,22 @@
         <div class="product-detail">
             <!-- Image Section -->
             <div class="image-section">
-                <img src="{{ $produk->primaryImage ? asset('images/products/' . $produk->primaryImage->image_path) : asset('images/products/' . $produk->gambar) }}" 
+                @php
+                    // Cek apakah produk punya primaryImage (dari database) atau gambar (data statis)
+                    if (isset($produk->primaryImage) && $produk->primaryImage) {
+                        $mainImageSrc = asset('images/products/' . $produk->primaryImage->image_path);
+                    } elseif (isset($produk->gambar) && !filter_var($produk->gambar, FILTER_VALIDATE_URL)) {
+                        $mainImageSrc = asset('images/products/' . $produk->gambar);
+                    } else {
+                        $mainImageSrc = $produk->gambar ?? asset('images/placeholder-product.jpg');
+                    }
+                @endphp
+                <img src="{{ $mainImageSrc }}" 
                      alt="{{ $produk->nama_produk }}" 
                      class="main-image"
                      id="mainImage">
                 
-                @if($produk->images && $produk->images->count() > 0)
+                @if(isset($produk->images) && is_object($produk->images) && $produk->images->count() > 0)
                 <div class="thumbnail-grid">
                     @foreach($produk->images as $index => $image)
                     <img src="{{ asset('images/products/' . $image->image_path) }}" 
@@ -662,10 +514,15 @@
                 </div>
 
                 <!-- Order Button -->
-                <button class="order-btn" onclick="pesanSekarang()">
-                    <i class="fas fa-shopping-cart"></i>
-                    Pesan Sekarang
-                </button>
+                <form id="orderForm" method="POST" action="{{ route('user.pupukbibit.konfirmasi', $produk->id_produk) }}">
+                    @csrf
+                    <input type="hidden" name="quantity" id="quantityInput" value="1">
+                    <input type="hidden" name="catatan" id="catatanInput" value="">
+                    <button type="submit" class="order-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        Pesan Sekarang
+                    </button>
+                </form>
 
                 <p class="info-text">
                     Anda dapat mengecek harga dan informasi terkait pupuk subsidi ini melalui informasi produk di bawah ini.
@@ -735,35 +592,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>Pupuk Subsidi Indonesia</h2>
-                <p>Platform resmi pemerintah untuk distribusi pupuk dan bibit bersubsidi kepada petani Indonesia. Mendukung ketahanan pangan nasional melalui program subsidi berkelanjutan.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Menu Utama</h3>
-                <ul class="footer-links">
-                    <li><a href="{{ route('dashboard') }}">Beranda</a></li>
-                    <li><a href="{{ route('user.pupukbibit') }}">Pupuk & Bibit</a></li>
-                    <li><a href="{{ route('profil.user') }}">Profil</a></li>
-                    <li><a href="{{ route('kontak') }}">Kontak</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <ul class="footer-links">
-                    <li><i class="fas fa-map-marker-alt"></i> Jl. Sitoluama, Laguboti, Toba</li>
-                    <li><i class="fas fa-phone"></i> +91 91813 23 2309</li>
-                    <li><i class="fas fa-envelope"></i> hello@squareup.com</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; {{ date('Y') }} INFORMATION SYSTEMS - Del Institute of Technology. All rights reserved.</p>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <script>
         const basePrice = {{ $produk->harga_subsidi }};
@@ -794,13 +623,10 @@
 
         function updateQty() {
             document.getElementById('qtyValue').textContent = currentQty;
+            document.getElementById('quantityInput').value = currentQty; // Update hidden input
             const total = basePrice * currentQty;
             document.getElementById('subtotal').textContent = 'Rp' + total.toLocaleString('id-ID');
             document.getElementById('total').textContent = 'Rp' + total.toLocaleString('id-ID');
-        }
-
-        function pesanSekarang() {
-            alert(`Anda akan memesan ${currentQty} unit ${document.querySelector('.product-title').textContent}\n\nTotal: Rp${(basePrice * currentQty).toLocaleString('id-ID')}\n\nFitur pemesanan akan segera tersedia!`);
         }
     </script>
 </body>

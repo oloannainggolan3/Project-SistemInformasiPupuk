@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard - Pupuk & Bibit Subsidi</title>
+    <title>Profil User - Pupuk & Bibit Subsidi</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -109,18 +109,6 @@
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
-        }
-
-        .dashboard-title {
-            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
-            padding: 1.5rem 2.5rem;
-            border-radius: 30px;
-            display: inline-block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1b5e20;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
         }
 
         .dashboard-content {
@@ -551,11 +539,6 @@
         }
 
         @media (max-width: 480px) {
-            .dashboard-title {
-                font-size: 1.4rem;
-                padding: 1rem 1.5rem;
-            }
-
             .stats-grid {
                 grid-template-columns: 1fr;
             }
@@ -578,8 +561,6 @@
                 {{ session('success') }}
             </div>
         @endif
-        
-        <div class="dashboard-title">User Dashboard</div>
 
         <div class="dashboard-content">
             <!-- Left Sidebar - Profile Card -->

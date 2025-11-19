@@ -245,6 +245,9 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         .btn-green {
@@ -449,6 +452,46 @@
                 <h2>Pupuk Subsidi</h2>
             </div>
             <div class="card-grid">
+                @php
+                    $pupukProducts = isset($products) ? $products->where('tipe_produk', 'pupuk') : collect([]);
+                @endphp
+
+                @forelse($pupukProducts as $produk)
+                <div class="product-card">
+                    <div class="product-image">
+                        @if($produk->primaryImage)
+                            <img src="{{ asset($produk->primaryImage->image_path) }}" alt="{{ $produk->nama_produk }}">
+                        @elseif($produk->gambar)
+                            <img src="{{ asset($produk->gambar) }}" alt="{{ $produk->nama_produk }}">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="{{ $produk->nama_produk }}">
+                        @endif
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ $produk->nama_produk }}</h3>
+                        <p>{{ Str::limit($produk->deskripsi ?? 'Pupuk berkualitas tinggi yang berperan penting dalam mendukung pertumbuhan tanaman secara optimal.', 200) }}</p>
+                        <ul>
+                            <li>Meningkatkan pertumbuhan vegetatif</li>
+                            <li>Memperbaiki warna hijau daun</li>
+                            <li>Cocok untuk semua jenis tanaman</li>
+                            <li>Mudah larut dalam air</li>
+                            <li>Efektif untuk tanaman padi</li>
+                        </ul>
+                        <div class="price-section">
+                            <div class="price-item">
+                                <div class="price-label">Harga Normal</div>
+                                <div class="price-value">Rp {{ number_format($produk->harga_normal, 0, ',', '.') }}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Harga Subsidi</div>
+                                <div class="price-value">Rp {{ number_format($produk->harga_subsidi, 0, ',', '.') }}</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('user.pupukbibit.detail', $produk->id_produk) }}" class="btn-detail btn-green">Lihat Detail & Pesan</a>
+                    </div>
+                </div>
+                @empty
+                <!-- Default static content jika tidak ada data dari database -->
                 <div class="product-card">
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
@@ -473,65 +516,66 @@
                                 <div class="price-value">Rp 1.800</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-green">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', 1) }}" class="btn-detail btn-green">Lihat Detail & Pesan</a>
                     </div>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="NPK">
                     </div>
                     <div class="product-info">
-                        <h3>Urea</h3>
-                        <p>Urea adalah pupuk nitrogen bersubsidi tinggi yang berperan penting dalam mendukung pertumbuhan daun dan batang tanaman secara optimal. Dengan kandungan nitrogen yang mudah diserap, urea membantu mempercepat proses fotosintesis sehingga tanaman dapat tumbuh lebih hijau dan mendukung perkembangan vegetatif.</p>
+                        <h3>NPK Phonska</h3>
+                        <p>Pupuk NPK Phonska mengandung unsur nitrogen, fosfor, dan kalium yang lengkap untuk mendukung pertumbuhan tanaman. Cocok untuk berbagai jenis tanaman dan meningkatkan produktivitas hasil panen.</p>
                         <ul>
-                            <li>Meningkatkan pertumbuhan vegetatif</li>
-                            <li>Memperbaiki warna hijau daun</li>
-                            <li>Cocok untuk semua jenis tanaman</li>
-                            <li>Mudah larut dalam air</li>
-                            <li>Efektif untuk tanaman padi</li>
+                            <li>Mengandung N, P, K lengkap</li>
+                            <li>Meningkatkan hasil panen</li>
+                            <li>Memperkuat akar tanaman</li>
+                            <li>Meningkatkan kualitas buah</li>
+                            <li>Cocok untuk padi dan palawija</li>
                         </ul>
                         <div class="price-section">
                             <div class="price-item">
                                 <div class="price-label">Harga Normal</div>
-                                <div class="price-value">Rp 2.300</div>
+                                <div class="price-value">Rp 2.500</div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">Harga Subsidi</div>
-                                <div class="price-value">Rp 1.800</div>
+                                <div class="price-value">Rp 2.000</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-green">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', 2) }}" class="btn-detail btn-green">Lihat Detail & Pesan</a>
                     </div>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="ZA">
                     </div>
                     <div class="product-info">
-                        <h3>Urea</h3>
-                        <p>Urea adalah pupuk nitrogen bersubsidi tinggi yang berperan penting dalam mendukung pertumbuhan daun dan batang tanaman secara optimal. Dengan kandungan nitrogen yang mudah diserap, urea membantu mempercepat proses fotosintesis sehingga tanaman dapat tumbuh lebih hijau dan mendukung perkembangan vegetatif.</p>
+                        <h3>ZA (Amonium Sulfat)</h3>
+                        <p>Pupuk ZA mengandung nitrogen dan sulfur yang baik untuk tanaman. Sangat cocok untuk tanaman yang membutuhkan unsur hara sulfur seperti kedelai, kacang tanah, dan sayuran.</p>
                         <ul>
-                            <li>Meningkatkan pertumbuhan vegetatif</li>
-                            <li>Memperbaiki warna hijau daun</li>
-                            <li>Cocok untuk semua jenis tanaman</li>
-                            <li>Mudah larut dalam air</li>
-                            <li>Efektif untuk tanaman padi</li>
+                            <li>Mengandung nitrogen 21%</li>
+                            <li>Mengandung sulfur 24%</li>
+                            <li>Memperbaiki struktur tanah</li>
+                            <li>Meningkatkan protein tanaman</li>
+                            <li>Cocok untuk tanah alkalin</li>
                         </ul>
                         <div class="price-section">
                             <div class="price-item">
                                 <div class="price-label">Harga Normal</div>
-                                <div class="price-value">Rp 2.300</div>
+                                <div class="price-value">Rp 1.900</div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">Harga Subsidi</div>
-                                <div class="price-value">Rp 1.800</div>
+                                <div class="price-value">Rp 1.400</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-green">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', 3) }}" class="btn-detail btn-green">Lihat Detail & Pesan</a>
                     </div>
                 </div>
+                @endforelse
             </div>
         </section>
 
@@ -541,89 +585,130 @@
                 <h2 style="color: #1e3a8a;">Bibit Subsidi</h2>
             </div>
             <div class="card-grid">
+                @php
+                    $bibitProducts = isset($products) ? $products->where('tipe_produk', 'bibit') : collect([]);
+                @endphp
+
+                @forelse($bibitProducts as $produk)
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
+                        @if($produk->primaryImage)
+                            <img src="{{ asset($produk->primaryImage->image_path) }}" alt="{{ $produk->nama_produk }}">
+                        @elseif($produk->gambar)
+                            <img src="{{ asset($produk->gambar) }}" alt="{{ $produk->nama_produk }}">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="{{ $produk->nama_produk }}">
+                        @endif
                     </div>
                     <div class="product-info">
-                        <h3>Urea</h3>
-                        <p>Urea adalah pupuk nitrogen bersubsidi tinggi yang berperan penting dalam mendukung pertumbuhan daun dan batang tanaman secara optimal. Dengan kandungan nitrogen yang mudah diserap, urea membantu mempercepat proses fotosintesis sehingga tanaman dapat tumbuh lebih hijau dan mendukung perkembangan vegetatif.</p>
+                        <h3>{{ $produk->nama_produk }}</h3>
+                        <p>{{ Str::limit($produk->deskripsi ?? 'Bibit unggul berkualitas tinggi yang telah tersertifikasi dan siap tanam.', 200) }}</p>
                         <ul>
-                            <li>Meningkatkan pertumbuhan vegetatif</li>
-                            <li>Memperbaiki warna hijau daun</li>
-                            <li>Cocok untuk semua jenis tanaman</li>
-                            <li>Mudah larut dalam air</li>
-                            <li>Efektif untuk tanaman padi</li>
+                            <li>Bibit unggul tersertifikasi</li>
+                            <li>Tingkat keberhasilan tinggi</li>
+                            <li>Tahan terhadap hama penyakit</li>
+                            <li>Produktivitas maksimal</li>
+                            <li>Panduan penanaman lengkap</li>
                         </ul>
                         <div class="price-section">
                             <div class="price-item">
                                 <div class="price-label">Harga Normal</div>
-                                <div class="price-value">Rp 2.300</div>
+                                <div class="price-value">Rp {{ number_format($produk->harga_normal, 0, ',', '.') }}</div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">Harga Subsidi</div>
-                                <div class="price-value">Rp 1.800</div>
+                                <div class="price-value">Rp {{ number_format($produk->harga_subsidi, 0, ',', '.') }}</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-blue">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', $produk->id_produk) }}" class="btn-detail btn-blue">Lihat Detail & Pesan</a>
+                    </div>
+                </div>
+                @empty
+                <!-- Default static content jika tidak ada data dari database -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Bibit Padi">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bibit Padi Unggul</h3>
+                        <p>Bibit padi unggul varietas terbaru dengan produktivitas tinggi dan tahan terhadap hama penyakit. Cocok untuk lahan sawah dengan hasil panen maksimal.</p>
+                        <ul>
+                            <li>Varietas unggul tersertifikasi</li>
+                            <li>Produktivitas 8-10 ton/ha</li>
+                            <li>Tahan terhadap wereng</li>
+                            <li>Umur panen 110-115 hari</li>
+                            <li>Kualitas beras premium</li>
+                        </ul>
+                        <div class="price-section">
+                            <div class="price-item">
+                                <div class="price-label">Harga Normal</div>
+                                <div class="price-value">Rp 15.000</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Harga Subsidi</div>
+                                <div class="price-value">Rp 10.000</div>
+                            </div>
+                        </div>
+                        <a href="{{ route('user.pupukbibit.detail', 4) }}" class="btn-detail btn-blue">Lihat Detail & Pesan</a>
                     </div>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
+                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" alt="Jagung">
                     </div>
                     <div class="product-info">
-                        <h3>Urea</h3>
-                        <p>Urea adalah pupuk nitrogen bersubsidi tinggi yang berperan penting dalam mendukung pertumbuhan daun dan batang tanaman secara optimal. Dengan kandungan nitrogen yang mudah diserap, urea membantu mempercepat proses fotosintesis sehingga tanaman dapat tumbuh lebih hijau dan mendukung perkembangan vegetatif.</p>
+                        <h3>Bibit Jagung Hibrida</h3>
+                        <p>Bibit jagung hibrida dengan tongkol besar dan produktivitas tinggi. Cocok untuk lahan kering dengan perawatan mudah dan hasil panen melimpah.</p>
                         <ul>
-                            <li>Meningkatkan pertumbuhan vegetatif</li>
-                            <li>Memperbaiki warna hijau daun</li>
-                            <li>Cocok untuk semua jenis tanaman</li>
-                            <li>Mudah larut dalam air</li>
-                            <li>Efektif untuk tanaman padi</li>
+                            <li>Jagung hibrida berkualitas</li>
+                            <li>Tongkol besar dan penuh</li>
+                            <li>Tahan kekeringan</li>
+                            <li>Produktivitas 12-14 ton/ha</li>
+                            <li>Cocok untuk pakan ternak</li>
                         </ul>
                         <div class="price-section">
                             <div class="price-item">
                                 <div class="price-label">Harga Normal</div>
-                                <div class="price-value">Rp 2.300</div>
+                                <div class="price-value">Rp 35.000</div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">Harga Subsidi</div>
-                                <div class="price-value">Rp 1.800</div>
+                                <div class="price-value">Rp 25.000</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-blue">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', 5) }}" class="btn-detail btn-blue">Lihat Detail & Pesan</a>
                     </div>
                 </div>
 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" alt="Urea">
+                        <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?w=400&h=300&fit=crop" alt="Kedelai">
                     </div>
                     <div class="product-info">
-                        <h3>Urea</h3>
-                        <p>Urea adalah pupuk nitrogen bersubsidi tinggi yang berperan penting dalam mendukung pertumbuhan daun dan batang tanaman secara optimal. Dengan kandungan nitrogen yang mudah diserap, urea membantu mempercepat proses fotosintesis sehingga tanaman dapat tumbuh lebih hijau dan mendukung perkembangan vegetatif.</p>
+                        <h3>Bibit Kedelai Unggul</h3>
+                        <p>Bibit kedelai varietas unggul dengan kandungan protein tinggi. Mudah ditanam dan cocok untuk rotasi tanaman padi dengan hasil panen optimal.</p>
                         <ul>
-                            <li>Meningkatkan pertumbuhan vegetatif</li>
-                            <li>Memperbaiki warna hijau daun</li>
-                            <li>Cocok untuk semua jenis tanaman</li>
-                            <li>Mudah larut dalam air</li>
-                            <li>Efektif untuk tanaman padi</li>
+                            <li>Varietas unggul bersertifikat</li>
+                            <li>Kandungan protein tinggi</li>
+                            <li>Tahan penyakit karat</li>
+                            <li>Produktivitas 2-3 ton/ha</li>
+                            <li>Cocok untuk rotasi tanaman</li>
                         </ul>
                         <div class="price-section">
                             <div class="price-item">
                                 <div class="price-label">Harga Normal</div>
-                                <div class="price-value">Rp 2.300</div>
+                                <div class="price-value">Rp 18.000</div>
                             </div>
                             <div class="price-item">
                                 <div class="price-label">Harga Subsidi</div>
-                                <div class="price-value">Rp 1.800</div>
+                                <div class="price-value">Rp 12.000</div>
                             </div>
                         </div>
-                        <button class="btn-detail btn-blue">Lihat Detail & Pesan</button>
+                        <a href="{{ route('user.pupukbibit.detail', 6) }}" class="btn-detail btn-blue">Lihat Detail & Pesan</a>
                     </div>
                 </div>
+                @endforelse
             </div>
         </section>
     </main>
@@ -640,7 +725,6 @@
                     block: 'start'
                 });
             } else {
-                // If section doesn't exist on current page, scroll to top
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
@@ -654,15 +738,6 @@
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(1);
                 scrollToSection(targetId);
-            });
-        });
-
-        // Button click effects - Redirect ke halaman detail
-        document.querySelectorAll('.btn-detail').forEach((button, index) => {
-            button.addEventListener('click', function() {
-                // ID produk berdasarkan urutan (1-6)
-                const productId = index + 1;
-                window.location.href = '{{ url("/user/pupuk-bibit") }}/' + productId + '/detail';
             });
         });
 
