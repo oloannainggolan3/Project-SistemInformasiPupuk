@@ -5,21 +5,31 @@
 @section('content')
 
 <!-- ====== HERO SECTION ====== -->
-<section style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(135deg, #2d7a3e, #4caf50); color:white; padding:80px 100px; min-height:500px; flex-wrap:wrap; gap:40px;">
-    
-    <div style="max-width:600px; flex:1;">
-        <h1 style="font-size:3.5rem; font-weight:bold; margin-bottom:20px; line-height:1.2;">Selamat Datang!</h1>
-        <p style="font-size:1.15rem; line-height:1.8; margin-bottom:35px; opacity:0.95;">
-            Mari bergabung agar kita meningkatkan hasil pertanian dengan akses mudah ke pupuk dan bibit subsidi dari pemerintah Indonesia. Dapatkan informasi, layanan, dan panduan agar pertanian semakin maju dan sejahtera.
-        </p>
-        <div style="display:flex; gap:15px; flex-wrap:wrap;">
-            <a href="{{ route('register') }}" style="display:inline-block; padding:14px 32px; border-radius:10px; text-decoration:none; font-weight:600; background-color:#1b5e20; color:white; font-size:15px; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(0,0,0,0.2);">Daftar Sekarang</a>
-            <a href="{{ route('login') }}" style="display:inline-block; padding:14px 32px; border-radius:10px; text-decoration:none; font-weight:600; border:2px solid white; color:white; font-size:15px; transition:all 0.3s ease; background:transparent;">Sudah Punya Akun</a>
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">Selamat Datang!</h1>
+            <p class="hero-description">
+                Mari bergabung agar kita meningkatkan hasil pertanian dengan akses mudah ke pupuk dan bibit subsidi dari pemerintah Indonesia. Dapatkan informasi, layanan, dan panduan agar pertanian semakin maju dan sejahtera.
+            </p>
+            <div class="hero-buttons">
+                <a href="{{ route('register') }}" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Daftar Sekarang
+                </a>
+                <a href="{{ route('login') }}" class="btn btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sudah Punya Akun
+                </a>
+            </div>
         </div>
-    </div>
-    
-    <div style="flex:1; display:flex; justify-content:center;">
-        <img src="{{ asset('images/petani.jpg') }}" alt="Petani" style="border-radius:50%; width:400px; height:400px; object-fit:cover; box-shadow:0 10px 40px rgba(0,0,0,0.3); border:8px solid rgba(255,255,255,0.2);">
+        
+        <div class="hero-image">
+            <div class="image-wrapper">
+                <img src="{{ asset('images/petani.jpg') }}" alt="Petani">
+                <div class="image-decoration"></div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -88,30 +98,282 @@
 </section>
 
 <style>
-    /* Hover effects */
+    /* Hero Section Styles */
+    .hero-section {
+        background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
+        color: white;
+        padding: 100px 60px;
+        min-height: 600px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: rotate 30s linear infinite;
+    }
+    
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .hero-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 60px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero-text {
+        flex: 1;
+        max-width: 600px;
+        animation: fadeInUp 1s ease;
+    }
+    
+    .hero-title {
+        font-size: 3.8rem;
+        font-weight: 800;
+        margin-bottom: 25px;
+        line-height: 1.1;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        letter-spacing: -1px;
+    }
+    
+    .hero-description {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        font-weight: 400;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 36px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.5px;
+    }
+    
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .btn i {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+    }
+    
+    .btn:hover i {
+        transform: translateX(5px);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: #000;
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.5);
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(251, 191, 36, 0.7);
+    }
+    
+    .btn-primary:active {
+        transform: translateY(-2px) scale(1.02);
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 3px solid white;
+        box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+    }
+    
+    .btn-secondary:hover {
+        background: white;
+        color: #065f46;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(255,255,255,0.4);
+    }
+    
+    .btn-secondary:active {
+        transform: translateY(-2px) scale(1.02);
+    }
+    
+    .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeInRight 1.2s ease;
+    }
+    
+    .image-wrapper {
+        position: relative;
+        width: 450px;
+        height: 450px;
+    }
+    
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 10px solid rgba(255,255,255,0.3);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        position: relative;
+        z-index: 2;
+        animation: pulse 3s ease-in-out infinite;
+    }
+    
+    .image-decoration {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        border-radius: 50%;
+        border: 3px dashed rgba(255,255,255,0.5);
+        animation: rotate 20s linear infinite;
+    }
+
+    /* Feature Cards Hover */
     section > div > div:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+        transform: translateY(-10px);
+        box-shadow: 0 10px 35px rgba(0,0,0,0.15) !important;
     }
     
-    a:hover {
-        transform: translateY(-2px);
-        opacity: 0.9;
-    }
-    
-    @media (max-width: 768px) {
-        section:first-of-type {
-            padding: 50px 30px !important;
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .hero-content {
+            flex-direction: column;
             text-align: center;
         }
         
-        section:first-of-type h1 {
-            font-size: 2.5rem !important;
+        .hero-text {
+            max-width: 100%;
         }
         
-        section:first-of-type img {
-            width: 300px !important;
-            height: 300px !important;
+        .hero-buttons {
+            justify-content: center;
+        }
+        
+        .image-wrapper {
+            width: 380px;
+            height: 380px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 60px 30px;
+            min-height: auto;
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        
+        .hero-description {
+            font-size: 1.05rem;
+        }
+        
+        .image-wrapper {
+            width: 320px;
+            height: 320px;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            font-size: 15px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        
+        .hero-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .image-wrapper {
+            width: 280px;
+            height: 280px;
         }
     }
 </style>

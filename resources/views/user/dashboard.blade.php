@@ -28,6 +28,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -480,12 +484,12 @@
             <div class="hero-text">
                 <span class="welcome-text">Selamat Datang!</span>
                 <p>Mari bersama kita tingkatkan hasil pertanian dengan akses mudah ke pupuk dan bibit subsidi. Dapatkan informasi, layanan, dan panduan agar pertanian semakin maju dan sejahtera.</p>
-                <button class="cta-button">Lihat Selengkapnya</button>
+                <a href="#info-section" class="cta-button" style="display: inline-block; text-decoration: none; text-align: center; line-height: 1;">Lihat Selengkapnya</a>
             </div>
         </div>
     </section>
 
-    <section class="why-choose-us">
+    <section class="why-choose-us" id="info-section">
         <div class="container">
             <h2>MENGAPA MEMILIH PUPUK & BIBIT SUBSIDI?</h2>
             <p class="subtitle-text">Program subsidi pemerintah memberikan akses kepada petani untuk mendapatkan pupuk dan bibit berkualitas tinggi dengan harga terjangkau, mendukung peningkatan produktivitas dan kesejahteraan petani Indonesia.</p>

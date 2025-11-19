@@ -15,131 +15,166 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
             color: #333;
         }
 
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
+        /* Header Styles */
+        header {
+            background: #fff;
+            padding: 12px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
             top: 0;
-            width: 260px;
-            height: 100vh;
-            background: linear-gradient(180deg, #004d00 0%, #1a4d1a 100%);
-            color: white;
-            padding: 20px 0;
-            overflow-y: auto;
+            z-index: 120;
         }
 
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .sidebar-header h2 {
-            font-size: 1.3em;
-            margin-bottom: 5px;
-        }
-
-        .sidebar-header p {
-            font-size: 0.85em;
-            opacity: 0.8;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 5px;
-        }
-
-        .sidebar-menu a {
+        /* Logo Section */
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
         }
 
-        .sidebar-menu a:hover,
-        .sidebar-menu a.active {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-left: 4px solid #ffd700;
-            padding-left: 16px;
-        }
-
-        .sidebar-menu i {
-            font-size: 1.1em;
-            width: 20px;
-            text-align: center;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 260px;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar h1 {
-            font-size: 1.5em;
-            color: #004d00;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
+        .logo-icon {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4CAF50, #2e7d32);
+            background: linear-gradient(135deg, #8bc34a, #4caf50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text-main {
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 15px;
+        }
+
+        .logo-text-sub {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 6px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #f3f4f6;
+            color: #2e7d32;
+        }
+
+        .nav-link.active {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        /* User Info in Header */
+        .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            background-color: #f3f4f6;
+        }
+
+        .user-avatar-header {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .user-details strong {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .user-details small {
+            font-size: 11px;
+            color: #666;
         }
 
         .logout-btn {
-            background: #dc3545;
+            padding: 7px 14px;
+            background: #f44336;
             color: white;
             border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            transition: all 0.3s ease;
         }
 
         .logout-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(220, 53, 69, 0.3);
+            background: #da190b;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Page Title */
+        .page-title {
+            font-size: 1.8em;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Alert Messages */
@@ -263,83 +298,110 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .main-content {
-                margin-left: 200px;
-                padding: 15px;
-            }
-
-            .top-bar {
+        @media (max-width: 1024px) {
+            .header-container {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 15px;
             }
 
+            nav {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .nav-link {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 576px) {
-            .sidebar {
-                transform: translateX(-100%);
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
-            .main-content {
-                margin-left: 0;
+            .nav-link span:last-child {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2><i class="fas fa-leaf"></i> Admin Panel</h2>
-            <p>Pupuk & Bibit Subsidi</p>
-        </div>
-        <ul class="sidebar-menu">
-            <li>
-                <a href="{{ route('admin.dashboard') }}" class="active">
-                    <i class="fas fa-tachometer-alt"></i>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <div class="logo-icon">🌾</div>
+                <div class="logo-text">
+                    <div class="logo-text-main">Admin Panel</div>
+                    <div class="logo-text-sub">Pupuk & Bibit Subsidi</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+                    <span style="font-size:16px;">📊</span>
                     <span>Dashboard</span>
                 </a>
-            </li>
-            <li>
-                <a href="{{ route('products.index') }}">
-                    <i class="fas fa-box"></i>
+                <a href="{{ route('products.index') }}" class="nav-link">
+                    <span style="font-size:16px;">📦</span>
                     <span>Kelola Produk</span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-users"></i>
+                <a href="#" class="nav-link">
+                    <span style="font-size:16px;">👥</span>
                     <span>Kelola Pengguna</span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-shopping-cart"></i>
+                <a href="#" class="nav-link">
+                    <span style="font-size:16px;">🛒</span>
                     <span>Pesanan</span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-chart-bar"></i>
+                <a href="#" class="nav-link">
+                    <span style="font-size:16px;">📈</span>
                     <span>Laporan</span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-cog"></i>
+                <a href="#" class="nav-link">
+                    <span style="font-size:16px;">⚙️</span>
                     <span>Pengaturan</span>
                 </a>
-            </li>
-        </ul>
-    </div>
+
+                <!-- User Info & Logout -->
+                <div class="user-info-header">
+                    <div class="user-avatar-header">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <strong>{{ session('admin_username', 'Admin') }}</strong>
+                        <small>Administrator</small>
+                    </div>
+                </div>
+                <form action="{{ route('admin.logout') }}" method="POST" style="margin: 0;">
+                    @csrf
+                    <button type="submit" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            </nav>
+        </div>
+    </header>
 
     <!-- Main Content -->
     <div class="main-content">
