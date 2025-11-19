@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Produk - Pupuk & Bibit Subsidi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+@extends('layouts.user')
+
+@section('title', 'Notifikasi')
+
+@push('styles')
 <style>
   /* Reset dan base */
   * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  body {
-      background-color: #f2f7f0;
-      color: #333;
-      font-size: 14px;
-      line-height: 1.5;
   }
 
   /* Container */
@@ -148,52 +137,48 @@
     }
   }
 </style>
-</head>
-<body>
-    @include('partials.header')
+@endpush
 
-  <main class="container" role="main" aria-label="Daftar notifikasi">
-    <h2>Notifikasi</h2>
+@section('content')
+<main class="container" role="main" aria-label="Daftar notifikasi">
+  <h2>Notifikasi</h2>
 
-    <section aria-live="polite">
-      <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Pesanan Telah Selesai 10 September 2025">
-        <div class="notif-header">
-          <span><i class="fa-check-square"></i> Pesanan Telah Selesai</span>
-          <span class="date">10/09/2025</span>
-        </div>
-        <p>"Halo Oloan, selamat atas kemajuan pesanan Anda di Pupuk & Bibit Subsidi! 🎉 Kami dengan senang menginformasikan bahwa.....</p>
-      </a>
-
-      <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Pesanan Sedang Diproses 6 September 2025">
-        <div class="notif-header">
-          <span><i class="fa-file-alt"></i> Pesanan Sedang Diproses</span>
-          <span class="date">06/09/2025</span>
-        </div>
-        <p>"Halo Oloan, terima kasih sudah memilih Pupuk dan Bibit Subsidi untuk belanja seru Anda! 🎉 Kami senang melihat pesanan de.....</p>
-      </a>
-
-      <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Segera Lakukan Konfirmasi Pesanan 5 September 2025">
-        <div class="notif-header">
-          <span><i class="fa-sync-alt"></i> Segera Lakukan Konfirmasi Pesanan</span>
-          <span class="date">05/09/2025</span>
-        </div>
-        <p>"Halo Oloan, terima kasih sudah memilih Pupuk dan Bibit Subsidi untuk belanja seru Anda! 🎉 Kami senang melihat pesanan de.....</p>
-      </a>
-
-      <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Verifikasi Akun Pengguna Berhasil 2 September 2025">
-        <div class="notif-header">
-          <span><i class="fa-check-circle"></i> Verifikasi Akun Pengguna Berhasil</span>
-          <span class="date">02/09/2025</span>
-        </div>
-        <p>"Selamat datang secara resmi di [Nama Platform/Web Kamu]! 🎉 Kami senang sekali mengumumkan bahwa proses verifikasi akun.....</p>
-      </a>
-
-      <div class="no-notifs" aria-live="polite" aria-atomic="true">
-        <hr /><span>Tidak Ada Notifikasi Lain</span><hr />
+  <section aria-live="polite">
+    <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Pesanan Telah Selesai 10 September 2025">
+      <div class="notif-header">
+        <span><i class="fa-check-square"></i> Pesanan Telah Selesai</span>
+        <span class="date">10/09/2025</span>
       </div>
-    </section>
-  </main>
+      <p>"Halo Oloan, selamat atas kemajuan pesanan Anda di Pupuk & Bibit Subsidi! 🎉 Kami dengan senang menginformasikan bahwa.....</p>
+    </a>
 
-@include('partials.footer')
-</body>
-</html>
+    <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Pesanan Sedang Diproses 6 September 2025">
+      <div class="notif-header">
+        <span><i class="fa-file-alt"></i> Pesanan Sedang Diproses</span>
+        <span class="date">06/09/2025</span>
+      </div>
+      <p>"Halo Oloan, terima kasih sudah memilih Pupuk dan Bibit Subsidi untuk belanja seru Anda! 🎉 Kami senang melihat pesanan de.....</p>
+    </a>
+
+    <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Segera Lakukan Konfirmasi Pesanan 5 September 2025">
+      <div class="notif-header">
+        <span><i class="fa-sync-alt"></i> Segera Lakukan Konfirmasi Pesanan</span>
+        <span class="date">05/09/2025</span>
+      </div>
+      <p>"Halo Oloan, terima kasih sudah memilih Pupuk dan Bibit Subsidi untuk belanja seru Anda! 🎉 Kami senang melihat pesanan de.....</p>
+    </a>
+
+    <a href="{{ route('notifikasi.detail') }}" class="notification-item" role="alert" aria-label="Verifikasi Akun Pengguna Berhasil 2 September 2025">
+      <div class="notif-header">
+        <span><i class="fa-check-circle"></i> Verifikasi Akun Pengguna Berhasil</span>
+        <span class="date">02/09/2025</span>
+      </div>
+      <p>"Selamat datang secara resmi di [Nama Platform/Web Kamu]! 🎉 Kami senang sekali mengumumkan bahwa proses verifikasi akun.....</p>
+    </a>
+
+    <div class="no-notifs" aria-live="polite" aria-atomic="true">
+      <hr /><span>Tidak Ada Notifikasi Lain</span><hr />
+    </div>
+  </section>
+</main>
+@endsection

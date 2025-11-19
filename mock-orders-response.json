@@ -1,0 +1,133 @@
+{
+  "page": 1,
+  "limit": 10,
+  "total": 30,
+  "last_page": 3,
+  "orders": [
+    {
+      "id": "ORD-2025-001",
+      "user_id": 1,
+      "name": "Ahmad Hidayat",
+      "phone": "083456789012",
+      "village_office": "Balai Desa Tani Makmur",
+      "date": "2025-09-30T00:00:00Z",
+      "date_formatted": "30 September 2025",
+      "items": [
+        {
+          "name": "Pupuk TSP",
+          "qty": "60 kg",
+          "price": 3000
+        },
+        {
+          "name": "Bibit Jagung Hibrida",
+          "qty": "15 kg",
+          "price": 35000
+        }
+      ],
+      "total_amount": 705000,
+      "total_formatted": "Rp 705.000",
+      "status": "Processing",
+      "status_color": "purple",
+      "confirmed_by_user": true
+    },
+    {
+      "id": "ORD-2025-002",
+      "user_id": 2,
+      "name": "Siti Nurhaliza",
+      "phone": "081234567890",
+      "village_office": "Balai Desa Sejahtera",
+      "date": "2025-10-05T00:00:00Z",
+      "date_formatted": "05 October 2025",
+      "items": [
+        {
+          "name": "Pupuk NPK Phonska",
+          "qty": "80 kg",
+          "price": 2500
+        },
+        {
+          "name": "Pupuk Urea",
+          "qty": "50 kg",
+          "price": 2000
+        }
+      ],
+      "total_amount": 300000,
+      "total_formatted": "Rp 300.000",
+      "status": "Ready",
+      "status_color": "lightgreen",
+      "confirmed_by_user": true
+    },
+    {
+      "id": "ORD-2025-003",
+      "user_id": 3,
+      "name": "Budi Santoso",
+      "phone": "082345678901",
+      "village_office": "Balai Desa Makmur Jaya",
+      "date": "2025-10-10T00:00:00Z",
+      "date_formatted": "10 October 2025",
+      "items": [
+        {
+          "name": "Bibit Padi Unggul",
+          "qty": "25 kg",
+          "price": 45000
+        },
+        {
+          "name": "Pupuk ZA",
+          "qty": "40 kg",
+          "price": 2200
+        }
+      ],
+      "total_amount": 1213000,
+      "total_formatted": "Rp 1.213.000",
+      "status": "Completed",
+      "status_color": "green",
+      "confirmed_by_user": true
+    },
+    {
+      "id": "ORD-2025-004",
+      "user_id": 4,
+      "name": "Dewi Lestari",
+      "phone": "085678901234",
+      "village_office": "Balai Desa Subur",
+      "date": "2025-10-12T00:00:00Z",
+      "date_formatted": "12 October 2025",
+      "items": [
+        {
+          "name": "Bibit Cabai",
+          "qty": "10 kg",
+          "price": 50000
+        },
+        {
+          "name": "Pupuk KCL",
+          "qty": "30 kg",
+          "price": 2800
+        }
+      ],
+      "total_amount": 584000,
+      "total_formatted": "Rp 584.000",
+      "status": "Pending",
+      "status_color": "gray",
+      "confirmed_by_user": true
+    },
+    {
+      "id": "ORD-2025-005",
+      "user_id": 5,
+      "name": "Eko Prasetyo",
+      "phone": "087890123456",
+      "village_office": "Balai Desa Sumber Rezeki",
+      "date": "2025-10-15T00:00:00Z",
+      "date_formatted": "15 October 2025",
+      "items": [
+        {
+          "name": "Pupuk NPK Phonska",
+          "qty": "100 kg",
+          "price": 2500
+        }
+      ],
+      "total_amount": 250000,
+      "total_formatted": "Rp 250.000",
+      "status": "Rejected",
+      "status_color": "red",
+      "confirmed_by_user": true
+    }
+  ]
+}

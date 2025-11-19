@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PupukBibitController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 Route::get('/', function () {
     // Jika user sudah login, redirect ke dashboard
@@ -56,7 +57,6 @@ Route::get('/profil', function () {
 Route::get('/profil/edit', [AuthController::class, 'editProfil'])->name('profil.edit')->middleware('auth');
 Route::put('/profil/update', [AuthController::class, 'updateProfil'])->name('profil.update')->middleware('auth');
 
-Route::resource('products', ProductController::class);
 // Routes yang memerlukan autentikasi
 Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     // Halaman Pupuk & Bibit
@@ -94,8 +94,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifikasi/detail', function () {
         return view('user.DetailNotif');
     })->name('notifikasi.detail');
-    
-    Route::resource('products', ProductController::class);
 });
 
 Route::get('/forgot-password-test', function () {
@@ -111,6 +109,26 @@ Route::prefix('admin')->group(function () {
     // Halaman yang memerlukan auth
     Route::middleware('admin.auth')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/overview', [AdminController::class, 'overview'])->name('admin.overview');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+        
+        // Notifikasi
+        Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications');
+        Route::post('/notifications/send', [AdminController::class, 'sendNotification'])->name('admin.notifications.send');
+        
+        // Manajemen Pesanan
+        Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+        
+        // API Routes untuk Orders
+        Route::prefix('api')->group(function () {
+            Route::get('/orders', [AdminOrderController::class, 'getOrders'])->name('admin.api.orders');
+            Route::get('/orders/stats', [AdminOrderController::class, 'getStats'])->name('admin.api.orders.stats');
+            Route::patch('/orders/{orderId}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.api.orders.status');
+        });
     });
+});
+
+// Routes untuk Manajemen Produk (Admin only - dilindungi middleware)
+Route::middleware('admin.auth')->group(function () {
+    Route::resource('products', ProductController::class);
 });
